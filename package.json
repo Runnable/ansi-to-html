@@ -1,6 +1,6 @@
 {
   "name": "ansi-to-html",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Convert ansi escaped text streams to html.",
   "main": "lib/ansi_to_html.js",
   "scripts": {
@@ -22,13 +22,16 @@
     "email": "rburns@paiges.net",
     "url": "http://rburns.paiges.net/"
   },
-  "contributors": [{
-    "name": "Michael",
-    "email": "michael@riesd.com"
-  }, {
-	"name": "Yoram Grahame",
-	"email": "yoz@yoz.com"
-  }],
+  "contributors": [
+    {
+      "name": "Michael",
+      "email": "michael@riesd.com"
+    },
+    {
+      "name": "Yoram Grahame",
+      "email": "yoz@yoz.com"
+    }
+  ],
   "license": {
     "type": "MIT",
     "url": "http://github.com/rburns/ansi-to-html/blob/master/LICENSE"
