@@ -119,10 +119,10 @@ class Filter
 					# 4. At each phase of the loop overwrite the string with the new values (overlapping if things extend)
 					returnString = statement + returnString.substr(statement.length)
 
-				line[lineIndex] = returnString
+				newLines[lineIndex] = returnString
 
 			# 5. Finally, join everything back together on newlines
-			inputLine[inputLineIndex] = newLines.join '\n'
+			input[inputLineIndex] = newLines.join '\n'
 		input
 
 
