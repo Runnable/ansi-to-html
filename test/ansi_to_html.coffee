@@ -147,6 +147,16 @@ describe 'ansi to html', () ->
 			result = 'hello'
 			test(text, result, done)
 
+		it 'handles returns properly', (done) ->
+			text = 'Hello Jim\rBai\n\r'
+			result = 'Bailo Jim\n'
+			test(text, result, done)
+
+		it 'handles returns properly', (done) ->
+			text = 'Hai Jim\rBai\n\r'
+			result = 'Bai Jim\n'
+			test(text, result, done)
+
 	describe 'with escapeXML option enabled', () ->
 
 		it 'escapes XML entities', (done) ->

@@ -83,12 +83,48 @@ class Filter
 
 	toHtml: (input) ->
 		@input = if typeof input is 'string' then [input] else input
+		@input = @handleReturns(@input)
+
 		buf = []
 		@stickyStack.forEach (element) =>
 			@generateOutput(element.token, element.data, (chunk) -> buf.push chunk)
 		@forEach (chunk) -> buf.push chunk
 		@input = []
 		buf.join('')
+
+	handleReturns: (input) ->
+		###
+			Problem.
+			Examples:
+				'foo\rbar\n\r' should result in : 'bar\n'
+				'Hello Jim\rBai\n\r' should translate to 'Bailo Jim\n'
+
+			Approach:
+			1. Split the entire thing into an array on '\n'
+			2. Loop over each item, split on \r
+			3. Loop over each \r item
+			4. At each phase of the loop overwrite the string with the new values (overlapping if things extend)
+			5. Finally, join everything back together on newlines
+		###
+
+		for inputLine, inputLineIndex in input
+			# 1. Split the entire thing into an array on '\n'
+			newLines = inputLine.split '\n'
+			for line, lineIndex in newLines
+				# 2. Loop over each item, split on \r
+				statements = line.split '\r'
+				returnString = ''
+				# 3. Loop over each \r item
+				for statement in statements
+					# 4. At each phase of the loop overwrite the string with the new values (overlapping if things extend)
+					returnString = statement + returnString.substr(statement.length)
+
+				line[lineIndex] = returnString
+
+			# 5. Finally, join everything back together on newlines
+			inputLine[inputLineIndex] = newLines.join '\n'
+		input
+
 
 	forEach: (callback) ->
 		buf = ''
